@@ -5,4 +5,11 @@
 </div>
 <div>
   TODO: Dynamicly loaded posts from subscribed timeline or if not logged in standard timeline
+  <ul class="subreddits">
+    <li *ngFor="let subreddit of subreddits">
+        <a routerLink="/subreddits/{{subreddit.name}}">
+            <span class="badge">{{subreddit.name}}:</span> {{subreddit.description}}
+        </a>
+    </li>
+</ul>
 </div>
