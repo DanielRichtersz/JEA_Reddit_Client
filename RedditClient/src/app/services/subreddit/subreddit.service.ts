@@ -1,23 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { PostService } from 'src/app/services/post/post.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Post } from 'src/app/models/Post';
 import { tap, catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+
+import { Post } from 'src/app/models/Post';
+import { Subreddit } from 'src/app/models/Subreddit';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubredditService {
 
-  private baseUrl = 'api/';  // URL to web api
-
   constructor(private http: HttpClient) { }
 
-  public getSubredditTopPosts(start: number, end: number, subredditName: string) {
-    console.log("getSubredditTopPosts method called");
+  public getSubredditTopPosts(start: number, end: number, subredditName: string) : Observable<Array<Post>> {
+    console.log("SubredditService.getSubredditTopPosts method called");
     const url = `http://localhost:8080/api/subreddits/${subredditName}/posts/${start}/to/${end}`;
 
     return this.http.get<Array<Post>>(url)
@@ -27,11 +24,22 @@ export class SubredditService {
       );
   }
 
+  public getSubreddit(subredditName: string) : Observable<Subreddit> {
+    console.log("SubredditService.getSubreddit method called");
+    const url = `http://localhost:8080/api/subreddits/${subredditName}`;
+
+    return this.http.get<Subreddit>(url)
+    .pipe(
+      tap(),
+      catchError(this.handleError<Subreddit>('Retrieving subreddit'))
+    );
+  }
+
   
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
-      console.log("Error during post retrieval: " + error);
+      console.log("Error during retrieval: " + error);
 
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead

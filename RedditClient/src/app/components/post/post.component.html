@@ -1,4 +1,7 @@
-<p>
-  post works!
-</p>
+<div *ngIf="post">
+  <h1>{{post.title}}</h1>
+  <div id="content">
+    {{post.content}}
+  </div>
+</div>
 <app-navigate-back-button></app-navigate-back-button>

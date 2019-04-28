@@ -10,12 +10,17 @@ import { ActivatedRoute } from '@angular/router';
 export class PostDetailsComponent implements OnInit {
 
   @Input('postTitle') private postTitle: string;
+  @Input('postId') private postId: string;
+
   private subredditName: string;
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.subredditName = this.route.snapshot.paramMap.get('subredditname');;
+    //Not used?
+    this.subredditName = this.route.snapshot.paramMap.get('subredditName');;
+    this.postTitle = this.postTitle.split(' ').join('_');
+
   }
 
 }

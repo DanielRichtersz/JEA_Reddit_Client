@@ -1,5 +1,5 @@
-<ul class="posts">
-    <div *ngFor="let post of posts">
-      <app-post-details [postTitle]="post.title"></app-post-details>
-    </div>
+<li class="posts">
+  <ul *ngFor="let post of posts">
+    <app-post-details [postId]="post.id" [postTitle]="post.title"></app-post-details>
   </ul>
+</li>
