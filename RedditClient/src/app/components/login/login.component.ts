@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  login(username: string, password: string) {
+  public login(username: string, password: string) {
     console.log("Login method in component");
     this.loginService.login(username, password).subscribe(getRedditor => {
       try {
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  navigateToUserTimeline() {
+  private navigateToUserTimeline() {
     console.log("In navigateToTimeline method");
     if (this.redditor.username != null && this.redditor.username != "") {
       console.log("In navigateToTimeline method if statement");

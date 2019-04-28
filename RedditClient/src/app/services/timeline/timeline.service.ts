@@ -1,32 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Redditor } from '../../models/Redditor';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Subreddit } from 'src/app/models/Subreddit';
+import { tap, catchError } from 'rxjs/operators';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json;charset=UTF-8' })
-};
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class TimelineService {
 
   private baseUrl = 'api/';  // URL to web api
 
-  constructor(private http: HttpClient) { 
-    
-  }
+  constructor(private http: HttpClient) { }
 
-  public login(username: string, password: string): Observable<Redditor> {
-    console.log("Login method called");
-    const url = `http://localhost:8080/api/redditors/${username}`;
+  public getFollowedSubreddits(username: string) : Observable<Array<Subreddit>> {
+    console.log("getFollowedSubreddits method called");
+    const url = `http://localhost:8080/api/redditors/${username}/timeline`;
 
-    return this.http.get<Redditor>(url)
+    return this.http.get<Array<Subreddit>>(url)
       .pipe(
         tap(),
-        catchError(this.handleError<Redditor>('login'))
+        catchError(this.handleError<Array<Subreddit>>('login'))
       );
   }
 

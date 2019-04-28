@@ -10,24 +10,24 @@ import { Subreddit } from 'src/app/models/Subreddit';
 })
 export class TimelineComponent implements OnInit {
 
-  subreddits: Array<Subreddit>;
-  errorMsg: String;
-  username: string;
+  private subreddits: Array<Subreddit>;
+  private errorMsg: String;
+  private username: string;
 
   constructor(
     private route: ActivatedRoute,
     private timelineService: TimelineService,
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
     this.username = this.route.snapshot.paramMap.get('username');
     console.log("Current route is: " + this.route);
     this.getFollowedSubreddits();
-
-
   }
 
-  getFollowedSubreddits() {
+  private getFollowedSubreddits() {
     this.timelineService.getFollowedSubreddits(this.username).subscribe(fSubreddits => {
       try {
         this.errorMsg = "";
@@ -37,7 +37,7 @@ export class TimelineComponent implements OnInit {
         console.log(fSubreddits);
       }
       catch {
-        this.errorMsg = "Something went wrong while loading followed subreddits in, please try again";
+        this.errorMsg = "Something went wrong while loading followed subreddits, please try again";
       }
     })
   }
