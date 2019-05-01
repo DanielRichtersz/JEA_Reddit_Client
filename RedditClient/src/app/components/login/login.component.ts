@@ -46,10 +46,7 @@ export class LoginComponent implements OnInit {
   }
 
   private navigateToUserTimeline() {
-    console.log("In navigateToTimeline method");
     if (this.redditor.username != null && this.redditor.username != "") {
-      console.log("In navigateToTimeline method if statement");
-
       this.router.navigate(['/redditors/' + this.redditor.username + '/timeline']);
     }
   }

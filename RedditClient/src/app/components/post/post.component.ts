@@ -34,9 +34,11 @@ export class PostComponent implements OnInit {
 
           console.log("Received response about post " + urlPostTitle);
           console.log(fPost);
+          resolve();
         }
         catch {
-
+          this.errorMsg = 'Something went wrong while retrieving Post data, please try again';
+          reject();
         }
       })
     })

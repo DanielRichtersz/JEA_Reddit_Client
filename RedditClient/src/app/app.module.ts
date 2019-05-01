@@ -13,6 +13,7 @@ import { SubredditDetailsComponent } from './components/subreddit-details/subred
 import { NavigateBackButtonComponent } from './components/navigate-back-button/navigate-back-button.component';
 import { PostDetailsComponent } from './components/post-details/post-details.component';
 import { PostListComponent } from './components/post-list/post-list.component';
+import { LogoutComponent } from './components/logout/logout/logout.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { PostListComponent } from './components/post-list/post-list.component';
     SubredditDetailsComponent,
     NavigateBackButtonComponent,
     PostDetailsComponent,
-    PostListComponent
+    PostListComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
