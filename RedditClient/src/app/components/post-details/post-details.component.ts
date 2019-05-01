@@ -20,7 +20,6 @@ export class PostDetailsComponent implements OnInit {
     //Not used?
     this.subredditName = this.route.snapshot.paramMap.get('subredditName');;
     this.postTitle = this.postTitle.split(' ').join('_');
-
   }
 
 }

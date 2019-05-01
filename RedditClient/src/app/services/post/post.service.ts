@@ -4,13 +4,15 @@ import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
 import { Post } from 'src/app/models/Post';
+import { ErrorHandlingService } from '../errorhandler/error-handling.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private errorHandler: ErrorHandlingService) { }
 
   getPost(subredditName: string, urlPostId: string, urlPostTitle: string): Observable<Post> {
     console.log("PostService.getPost method called");
@@ -19,23 +21,7 @@ export class PostService {
     return this.http.get<Post>(url)
       .pipe(
         tap(),
-        catchError(this.handleError<Post>('Retrieving post'))
+        catchError(this.errorHandler.handleError<Post>('Retrieving post'))
       );
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      console.log("Error during PostService retrieval: " + error);
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      //this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
   }
 }
