@@ -1,0 +1,25 @@
+<app-navigation-bar></app-navigation-bar>
+<div id='createSubredditForm'>
+  <div id='subredditFormFields'>
+    <h1>Create a new subreddit</h1>
+    <p>
+      Please fill in all fields. <br />
+    </p>
+    <ul>
+      <li>The abbreviation of a subreddit cannot contain any whitespaces, or the '+' sign.</li>
+      <li>The abbreviation of a subreddit should make clear what the subreddit is about.</li>
+    </ul>
+    <div>
+      <input type="text" placeholder="abbreviation" #subredditName />
+    </div>
+    <div>
+      <textarea type="text" placeholder="description" #subredditDescription></textarea>
+    </div>
+  </div>
+  <div id='subredditFormSubmitButton'>
+    <button (click)='submit(subredditName.value, subredditDescription.value)'>
+      Create
+    </button>
+    <label>{{errorMsg}}</label>
+  </div>
+</div>

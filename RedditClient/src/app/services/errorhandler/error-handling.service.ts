@@ -11,8 +11,7 @@ export class ErrorHandlingService {
   public handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
-      console.log("Error during login: " + error);
-
+      console.log("Error: ");
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 

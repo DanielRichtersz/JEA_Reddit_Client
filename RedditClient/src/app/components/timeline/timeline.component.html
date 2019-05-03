@@ -1,3 +1,4 @@
+<app-navigation-bar></app-navigation-bar>
 <div style="text-align:center">
   <h1 *ngIf="username">
     Welcome {{username}} to your timeline! <app-logout></app-logout>
@@ -5,3 +6,4 @@
 </div>
 TODO: Dynamicly loaded posts from subscribed timeline or if not logged in standard timeline
 <app-subreddit-list [parentData]="subreddits"></app-subreddit-list>
+<app-create-subreddit-button></app-create-subreddit-button>

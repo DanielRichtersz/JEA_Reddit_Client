@@ -13,8 +13,15 @@ import { SubredditDetailsComponent } from './components/subreddit-details/subred
 import { NavigateBackButtonComponent } from './components/navigate-back-button/navigate-back-button.component';
 import { PostDetailsComponent } from './components/post-details/post-details.component';
 import { PostListComponent } from './components/post-list/post-list.component';
-import { LogoutComponent } from './components/logout/logout/logout.component';
-
+import { LogoutComponent } from './components/logout/logout.component';
+import { CreateSubredditButtonComponent } from './components/create-subreddit-button/create-subreddit-button.component';
+import { CreateSubredditFormComponent } from './components/create-subreddit-form/create-subreddit-form.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { FormsModule } from '@angular/forms';
+import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
+import { CreatePostButtonComponent } from './components/create-post-button/create-post-button.component';
+import { CreatePostFormComponent } from './components/create-post-form/create-post-form.component';
 
 @NgModule({
   declarations: [
@@ -28,12 +35,20 @@ import { LogoutComponent } from './components/logout/logout/logout.component';
     NavigateBackButtonComponent,
     PostDetailsComponent,
     PostListComponent,
-    LogoutComponent
+    LogoutComponent,
+    CreateSubredditButtonComponent,
+    CreateSubredditFormComponent,
+    SearchBarComponent,
+    SearchResultsComponent,
+    NavigationBarComponent,
+    CreatePostButtonComponent,
+    CreatePostFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
+<app-navigation-bar></app-navigation-bar>
 <div *ngIf="subreddit">
   <h1>{{subreddit.name}}</h1>
   {{subreddit.description}}
 </div>
 <app-post-list [posts]="posts"></app-post-list>
-<app-navigate-back-button></app-navigate-back-button>

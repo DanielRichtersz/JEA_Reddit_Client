@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Post } from '../../models/Post';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-details',
@@ -14,12 +14,16 @@ export class PostDetailsComponent implements OnInit {
 
   private subredditName: string;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
-    //Not used?
-    this.subredditName = this.route.snapshot.paramMap.get('subredditName');;
-    this.postTitle = this.postTitle.split(' ').join('_');
+    this.subredditName = this.route.snapshot.paramMap.get('subredditName');
   }
 
+  private navigateToPostComponent() {
+    console.log("clicked!");
+    this.router.navigate(['/subreddits', this.subredditName, 'posts', this.postId, this.postTitle]);
+  }
 }

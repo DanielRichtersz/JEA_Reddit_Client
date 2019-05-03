@@ -16,7 +16,7 @@ export class PostService {
 
   getPost(subredditName: string, urlPostId: string, urlPostTitle: string): Observable<Post> {
     console.log("PostService.getPost method called");
-    const url = `http://localhost:8080/api/subreddits/${subredditName}/posts/${urlPostId}/${urlPostTitle}`;
+    const url = `http://localhost:8080/api/subreddits/${subredditName}/posts/${urlPostId}/${urlPostTitle}`;    
 
     return this.http.get<Post>(url)
       .pipe(
