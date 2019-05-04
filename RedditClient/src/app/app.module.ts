@@ -22,6 +22,10 @@ import { SearchResultsComponent } from './components/search-results/search-resul
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { CreatePostButtonComponent } from './components/create-post-button/create-post-button.component';
 import { CreatePostFormComponent } from './components/create-post-form/create-post-form.component';
+import { CreateCommentFormComponent } from './components/create-comment-form/create-comment-form.component';
+import { CreateCommentButtonComponent } from './components/create-comment-button/create-comment-button.component';
+import { ClosableComponentComponent } from './components/closable-component/closable-component.component';
+import { ClosableCreateCommentFormComponent } from './components/closable-create-comment-form/closable-create-comment-form.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,11 @@ import { CreatePostFormComponent } from './components/create-post-form/create-po
     SearchResultsComponent,
     NavigationBarComponent,
     CreatePostButtonComponent,
-    CreatePostFormComponent
+    CreatePostFormComponent,
+    CreateCommentFormComponent,
+    CreateCommentButtonComponent,
+    ClosableComponentComponent,
+    ClosableCreateCommentFormComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +58,12 @@ import { CreatePostFormComponent } from './components/create-post-form/create-po
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  entryComponents: [
+    CreateCommentFormComponent,
+  ],
+  providers: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
