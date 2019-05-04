@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-post-button',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreatePostButtonComponent implements OnInit {
 
-  constructor() { }
+  @Input('subredditName') subredditName: string;
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  private navigateToForm() {
+    this.router.navigate(['/subreddits/' + this.subredditName + '/submit']);
+  }
 }

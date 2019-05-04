@@ -10,6 +10,7 @@ export class NavigationBarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('TODO: Username from socket for navigation');
   }
 
 }

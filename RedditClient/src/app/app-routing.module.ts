@@ -6,14 +6,16 @@ import { SubredditComponent } from './components/subreddit/subreddit.component';
 import { PostComponent } from './components/post/post.component';
 import { CreateSubredditFormComponent } from './components/create-subreddit-form/create-subreddit-form.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { CreatePostFormComponent } from './components/create-post-form/create-post-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'redditors/:username/timeline', component: TimelineComponent },
-  { path: 'subreddits/:subredditName', component: SubredditComponent},
-  { path: 'subreddits/:subredditName/posts/:postId/:postTitle', component: PostComponent},
   { path: 'redditor/subreddits/submit', component: CreateSubredditFormComponent},
+  { path: 'subreddits/:subredditName', component: SubredditComponent},
+  { path: 'subreddits/:subredditName/submit', component: CreatePostFormComponent },
+  { path: 'subreddits/:subredditName/posts/:postId/:postTitle', component: PostComponent},
   { path: 'search/:searchTerm', component: SearchResultsComponent },
 ];
 
