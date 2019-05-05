@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CreateCommentFormComponent } from '../create-comment-form/create-comment-form.component';
+import { Postable } from 'src/app/models/Postable';
 
 @Component({
   selector: 'app-create-comment-button',
@@ -8,9 +9,10 @@ import { CreateCommentFormComponent } from '../create-comment-form/create-commen
 })
 export class CreateCommentButtonComponent implements OnInit {
 
+  @Input("postable") postable: Postable;
   private showForm: boolean;
 
-  constructor() { 
+  constructor() {
     this.showForm = false;
   }
 
@@ -26,5 +28,4 @@ export class CreateCommentButtonComponent implements OnInit {
     console.log("Closing");
     this.showForm = false;
   }
-
 }

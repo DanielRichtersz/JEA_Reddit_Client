@@ -9,8 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class PostDetailsComponent implements OnInit {
 
-  @Input('postTitle') private postTitle: string;
-  @Input('postId') private postId: string;
+  @Input('post') post: Post;
 
   private subredditName: string;
 
@@ -23,7 +22,6 @@ export class PostDetailsComponent implements OnInit {
   }
 
   private navigateToPostComponent() {
-    console.log("clicked!");
-    this.router.navigate(['/subreddits', this.subredditName, 'posts', this.postId, this.postTitle]);
+    this.router.navigate(['/subreddits', this.subredditName, 'posts', this.post.id, this.post.title]);
   }
 }

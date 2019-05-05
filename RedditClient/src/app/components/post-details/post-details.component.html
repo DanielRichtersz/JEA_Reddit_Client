@@ -1,11 +1,11 @@
 <div>
     <a (click)='navigateToPostComponent()'>
-        {{postTitle}}
+        <b><u>{{post.title}}</u></b>
     </a>
     <div>
-        TODO: Display score (amount of upvotes minus amount of downvotes)
+        Posted on: {{post.dateCreated}} - Posted by: {{post.owner.username}}
     </div>
     <div>
-        TODO: Display owner username
+        TODO: Display score (amount of upvotes minus amount of downvotes)
     </div>
 </div>

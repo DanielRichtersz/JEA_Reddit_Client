@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Postable } from 'src/app/models/Postable';
 
 @Component({
   selector: 'app-closable-create-comment-form',
@@ -7,12 +8,13 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ClosableCreateCommentFormComponent implements OnInit {
 
+  @Input("postable") postable: Postable;
   @Input("show") show: boolean;
   @Output("closeEmitter") closeEmitter: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
-ngOnInit() {
+  ngOnInit() {
     this.checkInputs();
   }
 
@@ -21,12 +23,11 @@ ngOnInit() {
       throw new Error("Attribute 'show' is required");
     }
     if (this.closeEmitter == null) {
-      throw new Error("Attribute 'close' is required"); 
+      throw new Error("Attribute 'close' is required");
     }
   }
 
   private close() {
     this.closeEmitter.emit();
   }
-
 }

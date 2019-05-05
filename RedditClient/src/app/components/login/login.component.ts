@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
       try {
         this.errorMsg = "";
         this.redditor = getRedditor;
+        this.saveLoggedInUser();
   
         this.navigateToUserTimeline();
       }
@@ -34,6 +35,10 @@ export class LoginComponent implements OnInit {
         this.errorMsg = "Something went wrong while logging in, please try again";
       }
     });
+  }
+
+  saveLoggedInUser() {
+    
   }
 
   private navigateToUserTimeline() {

@@ -26,6 +26,8 @@ import { CreateCommentFormComponent } from './components/create-comment-form/cre
 import { CreateCommentButtonComponent } from './components/create-comment-button/create-comment-button.component';
 import { ClosableComponentComponent } from './components/closable-component/closable-component.component';
 import { ClosableCreateCommentFormComponent } from './components/closable-create-comment-form/closable-create-comment-form.component';
+import { CommentListComponent } from './components/comment-list/comment-list.component';
+import { CommentDetailsComponent } from './components/comment-details/comment-details.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { ClosableCreateCommentFormComponent } from './components/closable-create
     CreateCommentFormComponent,
     CreateCommentButtonComponent,
     ClosableComponentComponent,
-    ClosableCreateCommentFormComponent
+    ClosableCreateCommentFormComponent,
+    CommentListComponent,
+    CommentDetailsComponent
   ],
   imports: [
     BrowserModule,

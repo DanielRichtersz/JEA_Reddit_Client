@@ -5,4 +5,8 @@
     {{post.content}}
   </div>
 </div>
-<app-create-comment-button></app-create-comment-button>
+<div id="comments">
+  <h2>Comments</h2>
+  <app-create-comment-form [parentPostable]="post"></app-create-comment-form>
+  <app-comment-list *ngIf="comments" [comments]="comments"></app-comment-list>
+</div>
