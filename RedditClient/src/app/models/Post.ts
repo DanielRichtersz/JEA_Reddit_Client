@@ -1,5 +1,5 @@
-export class Post {
-    id: number;
+import { Postable } from './Postable';
+
+export class Post extends Postable{
     title: string;
-    content: string;
   }

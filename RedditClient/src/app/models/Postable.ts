@@ -9,4 +9,5 @@ export class Postable {
     owner: Redditor;
     comments: Array<Comment>;
     votes: Array<Vote>;
+    dateCreated: Date;
   }

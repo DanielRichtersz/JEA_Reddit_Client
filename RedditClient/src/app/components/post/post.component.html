@@ -1,3 +1,12 @@
-<p>
-  post works!
-</p>
+<app-navigation-bar></app-navigation-bar>
+<div *ngIf="post">
+  <h1>{{post.title}}</h1>
+  <div id="content">
+    {{post.content}}
+  </div>
+</div>
+<div id="comments">
+  <h2>Comments</h2>
+  <app-create-comment-form [parentPostable]="post"></app-create-comment-form>
+  <app-comment-list *ngIf="comments" [comments]="comments"></app-comment-list>
+</div>

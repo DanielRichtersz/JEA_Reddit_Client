@@ -1,0 +1,13 @@
+<div id="commentFormContainer" >
+  <div id='commentFormFields'>
+    <div>
+      <textarea type="text" placeholder="What do you want to say?" #commentContent></textarea>
+    </div>
+  </div>
+  <div id='commentFormSubmitButton'>
+    <button (click)='submit(commentContent.value)'>
+      save
+    </button>
+    <label>{{errorMsg}}</label>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+<button (click)='openForm()'>Comment</button>
+<app-closable-create-comment-form #closable *ngIf="showForm" (closeEmitter)="closeForm()" [show]="showForm"
+    [postable]="postable">
+</app-closable-create-comment-form>

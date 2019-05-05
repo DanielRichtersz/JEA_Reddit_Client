@@ -1,0 +1,21 @@
+<app-navigation-bar></app-navigation-bar>
+<div id='createPostFormContainer'>
+  <div id='postFormFields'>
+    <h1>Create a new post on {{subredditName}}:</h1>
+    <p>
+      Please fill in all fields. <br />
+    </p>
+    <div>
+      <input type="text" placeholder="Title" #postTitle />
+    </div>
+    <div>
+      <textarea type="text" placeholder="Place your content here" #postContent></textarea>
+    </div>
+  </div>
+  <div id='postFormSubmitButton'>
+    <button (click)='submit(postTitle.value, postContent.value)'>
+      Create
+    </button>
+    <label>{{errorMsg}}</label>
+  </div>
+</div>

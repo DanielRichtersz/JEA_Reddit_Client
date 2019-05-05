@@ -1,0 +1,9 @@
+<div #commentContainer>
+  <div #commentDetails>
+    Posted on: {{comment.dateCreated}} - Posted by: {{comment.owner.username}}
+  </div>
+  <div #commentContent>
+    {{comment.content}}
+  </div>
+  <app-create-comment-button *ngIf="comment" [postable]="comment"></app-create-comment-button>
+</div>

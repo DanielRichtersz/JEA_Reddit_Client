@@ -1,0 +1,7 @@
+<app-navigation-bar></app-navigation-bar>
+<div *ngIf="subreddit">
+  <h1>{{subreddit.name}}</h1>
+  {{subreddit.description}}
+</div>
+<app-post-list [posts]="posts"></app-post-list>
+<app-create-post-button *ngIf="subreddit" [subredditName]="subreddit.name"></app-create-post-button>
