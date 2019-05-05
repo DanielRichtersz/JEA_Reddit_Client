@@ -1,0 +1,17 @@
+.navContainer {
+    display: flex;
+    padding: 5px 0;
+    background: #333;
+    color: #fff;
+}
+
+.navContainer-searchBar {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.navContainer-logout {
+    display: flex;
+    justify-self: flex-end;
+}

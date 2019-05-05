@@ -53,4 +53,15 @@ export class CommentService {
         catchError(this.errorHandler.handleError<Array<Comment>>("Retrieving comments from post"))
       );
     }
+
+    getCommentsFromComment(commentId: number) {
+      console.log("CommentService.getCommentsFromComment method called");
+      const url = 'http://localhost:8080/api/comments/' + commentId + '/comments';
+
+      return this.http.get<Array<Comment>>(url)
+      .pipe(
+        tap(),
+        catchError(this.errorHandler.handleError<Array<Comment>>("Retrieving comments from comment"))
+      );
+    }
 }

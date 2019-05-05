@@ -58,6 +58,7 @@ export class PostComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.commentService.getCommentsFromPost(urlSubredditName, urlPostId, urlPostTitle).subscribe(fComments => {
         try {
+          this.errorMsg = "";
           this.comments = fComments;
 
           console.log("Received response about comments from post ", urlPostTitle);
