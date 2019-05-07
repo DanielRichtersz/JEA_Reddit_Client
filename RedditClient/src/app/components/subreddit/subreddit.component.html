@@ -3,5 +3,6 @@
   <h1>{{subreddit.name}}</h1>
   {{subreddit.description}}
 </div>
-<app-post-list [posts]="posts"></app-post-list>
+<app-subreddit-subscribe-button *ngIf="subreddit" [subredditName]="subreddit.name" [username]="username"></app-subreddit-subscribe-button>
 <app-create-post-button *ngIf="subreddit" [subredditName]="subreddit.name"></app-create-post-button>
+<app-post-list [posts]="posts"></app-post-list>

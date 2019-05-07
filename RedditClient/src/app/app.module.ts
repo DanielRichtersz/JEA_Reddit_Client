@@ -28,6 +28,7 @@ import { ClosableComponentComponent } from './components/closable-component/clos
 import { ClosableCreateCommentFormComponent } from './components/closable-create-comment-form/closable-create-comment-form.component';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
 import { CommentDetailsComponent } from './components/comment-details/comment-details.component';
+import { SubredditSubscribeButtonComponent } from './components/subreddit-subscribe-button/subreddit-subscribe-button.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { CommentDetailsComponent } from './components/comment-details/comment-de
     ClosableComponentComponent,
     ClosableCreateCommentFormComponent,
     CommentListComponent,
-    CommentDetailsComponent
+    CommentDetailsComponent,
+    SubredditSubscribeButtonComponent
   ],
   imports: [
     BrowserModule,

@@ -56,4 +56,31 @@ export class SubredditService {
       );
   }
 
+  public subscribeToSubreddit(subredditName: string, username: string) {
+    console.log("SubredditService.subscribeToSubreddit method called");
+    const url = `http://localhost:8080/api/subreddits/${subredditName}/subscribe`;
+
+    let body = new HttpParams();
+    body = body.set('username', username);
+
+    return this.http.post<boolean>(url, body, httpOptions)
+      .pipe(
+        tap(),
+        catchError(this.errorHandler.handleError<boolean>('Subscribing to subreddit ' + subredditName)));
+  }
+
+  public getSubscribedToSubreddit(subredditName: string, username: string): Observable<boolean> {
+    console.log("SubredditService.getSubscribedToSubreddit method called");
+    const url = `http://localhost:8080/api/subreddits/${subredditName}/getsubscribed`;
+
+    let body = new HttpParams();
+    body = body.set('username', username);
+
+    return this.http.post<boolean>(url, body, httpOptions)
+      .pipe(
+        tap(),
+        catchError(this.errorHandler.handleError<boolean>('Retrieving subreddit'))
+      );
+  }
+
 }

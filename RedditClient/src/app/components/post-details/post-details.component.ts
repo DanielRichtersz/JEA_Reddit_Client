@@ -22,6 +22,6 @@ export class PostDetailsComponent implements OnInit {
   }
 
   private navigateToPostComponent() {
-    this.router.navigate(['/subreddits', this.subredditName, 'posts', this.post.id, this.post.title]);
+    this.router.navigate(['/subreddits/searchresults/posts', this.post.id, this.post.title]);
   }
 }

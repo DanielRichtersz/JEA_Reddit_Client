@@ -4,6 +4,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { ErrorHandlingService } from '../errorhandler/error-handling.service';
 import { Subreddit } from 'src/app/models/Subreddit';
 import { Post } from 'src/app/models/Post';
+import { Comment } from 'src/app/models/Comment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
@@ -13,6 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class SearchService {
+
 
   constructor(
     private errorHandler: ErrorHandlingService,
@@ -45,5 +47,19 @@ export class SearchService {
       tap(),
       catchError(this.errorHandler.handleError<Array<Post>>('Searching for posts'))
     );
+  }
+
+  public searchForComments(searchTerm: string) {
+    console.log('SearchService.searchRedditForComments method called');
+
+    let url = 'http://localhost:8080/api/search/comments';
+    let body = new HttpParams();
+    body = body.set('searchTerm', searchTerm);
+
+    return this.http.post<Array<Comment>>(url, body,  httpOptions)
+    .pipe(
+      tap(),
+      catchError(this.errorHandler.handleError<Array<Comment>>('Searching for comments'))
+    );  
   }
 }

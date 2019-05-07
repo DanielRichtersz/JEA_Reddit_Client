@@ -46,7 +46,7 @@ export class CommentService {
     getCommentsFromPost(subredditName: string, postId: string, postTitle: string) {
       console.log("CommentService.getCommentsFromPost method called");
       const url = 'http://localhost:8080/api/subreddits/' + subredditName + '/posts/' + postId + '/' + postTitle + '/comments';
-
+      console.log("Url is: ", url);
       return this.http.get<Array<Comment>>(url)
       .pipe(
         tap(),

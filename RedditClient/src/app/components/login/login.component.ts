@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
       try {
         this.errorMsg = "";
         this.redditor = getRedditor;
+        console.log("Redditor: ", this.redditor);
         this.saveLoggedInUser();
   
         this.navigateToUserTimeline();
