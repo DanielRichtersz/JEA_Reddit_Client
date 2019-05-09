@@ -38,7 +38,7 @@ export class CreateCommentFormComponent implements OnInit {
     if (!postId || !postTitle || !subredditName) {
       this.errorMsg = 'Something went wrong while loading the page. Please refresh the page and try again';
     }
-
+    
     this.commentService.createComment(subredditName, "username1", commentContent, this.reactionTo.id.toString()).subscribe(fComment => {
       try {
         this.errorMsg = '';

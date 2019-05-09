@@ -23,7 +23,6 @@ export class TimelineComponent implements OnInit {
 
   ngOnInit() {
     this.username = this.route.snapshot.paramMap.get('username');
-    console.log("Current route is: " + this.route);
     this.getFollowedSubreddits();
   }
 
