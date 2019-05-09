@@ -14,6 +14,7 @@ export class ErrorHandlingService {
       console.log("Error: ");
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
+      
 
       // TODO: better job of transforming error for user consumption
       //this.log(`${operation} failed: ${error.message}`);

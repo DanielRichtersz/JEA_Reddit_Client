@@ -17,14 +17,14 @@ export class CommentService {
   constructor(private http: HttpClient,
     private errorHandler: ErrorHandlingService) { }
 
-    createComment(subredditName: string, username: string, content: string, postableId: string) : Observable<Comment> {
+    public createComment(subredditName: string, username: string, content: string, postableId: string) {
       console.log('CommentService.createComment method called');
       const url = 'http://localhost:8080/api/comments/';
   
-      let body = new HttpParams();
-      body = body.set('postableId', postableId);
-      body = body.set('username', username);
-      body = body.set('content', content);
+      let body = new HttpParams();  
+      body = body.set('postableId', postableId)
+      .set('username', username)
+      .set('content', content);
   
       return this.http.post<Comment>(url, body, httpOptions)
         .pipe(
@@ -32,7 +32,7 @@ export class CommentService {
           catchError(this.errorHandler.handleError<Comment>('Creating comment')));
     }
 
-    getComment(subredditName: string, commentId: string): Observable<Comment> {
+    public getComment(subredditName: string, commentId: string): Observable<Comment> {
       console.log("CommentService.getComment method called");
       const url = `http://localhost:8080/api/comments`;    
   
@@ -43,14 +43,25 @@ export class CommentService {
         );
     }
 
-    getCommentsFromPost(subredditName: string, postId: string, postTitle: string) {
+    public getCommentsFromPost(subredditName: string, postId: string, postTitle: string) {
       console.log("CommentService.getCommentsFromPost method called");
       const url = 'http://localhost:8080/api/subreddits/' + subredditName + '/posts/' + postId + '/' + postTitle + '/comments';
-
+      console.log("Url is: ", url);
       return this.http.get<Array<Comment>>(url)
       .pipe(
         tap(),
         catchError(this.errorHandler.handleError<Array<Comment>>("Retrieving comments from post"))
+      );
+    }
+
+    public getCommentsFromComment(commentId: number) {
+      console.log("CommentService.getCommentsFromComment method called");
+      const url = 'http://localhost:8080/api/comments/' + commentId + '/comments';
+
+      return this.http.get<Array<Comment>>(url)
+      .pipe(
+        tap(),
+        catchError(this.errorHandler.handleError<Array<Comment>>("Retrieving comments from comment"))
       );
     }
 }

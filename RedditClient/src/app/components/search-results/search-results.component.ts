@@ -4,6 +4,7 @@ import { SearchService } from 'src/app/services/search/search.service';
 import { Subreddit } from 'src/app/models/Subreddit';
 import { Post } from 'src/app/models/Post';
 import { reject } from 'q';
+import { Comment } from 'src/app/models/Comment';
 
 @Component({
   selector: 'app-search-results',
@@ -16,6 +17,7 @@ export class SearchResultsComponent implements OnInit {
   private errorMsg: string;
   private foundSubreddits: Array<Subreddit>;
   private foundPosts: Array<Post>;
+  private foundComments: Array<Comment>;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +35,7 @@ export class SearchResultsComponent implements OnInit {
   private search() {
     this.searchForSubreddits();
     this.searchForPosts();
+    this.searchForComments();
   }
 
   private searchForSubreddits() {
@@ -59,6 +62,24 @@ export class SearchResultsComponent implements OnInit {
         return new Promise((resolve, reject) => {
           this.searchService.searchForPosts(this.searchTerm).subscribe(fPosts => {
             this.foundPosts = fPosts;
+            resolve();
+          })
+        });
+
+      }
+      catch {
+        reject();
+      }
+    }
+  }
+
+  private searchForComments() {
+    if (this.searchTermExists()) {
+      this.foundComments = null;
+      try {
+        return new Promise((resolve, reject) => {
+          this.searchService.searchForComments(this.searchTerm).subscribe(fComments => {
+            this.foundComments = fComments;
             resolve();
           })
         });

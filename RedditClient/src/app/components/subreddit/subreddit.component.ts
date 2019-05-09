@@ -13,6 +13,7 @@ export class SubredditComponent implements OnInit {
 
   private subreddit: Subreddit;
   private posts: Array<Post>;
+  private username: string;
 
   private errorMsg: String;
 
@@ -23,6 +24,8 @@ export class SubredditComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("TODO: Username from auth");
+    this.username = "username1";
     this.getSubreddit().then(() => {
       this.getSubredditTopPosts(0, 2);
     });

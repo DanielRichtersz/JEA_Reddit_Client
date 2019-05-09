@@ -1,0 +1,13 @@
+.create-comment-button {
+    background: 0;
+    border: 0;
+    font-size: 10px;
+    color: #000;
+    font-weight: 700;
+
+    &:hover,
+    focus {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}

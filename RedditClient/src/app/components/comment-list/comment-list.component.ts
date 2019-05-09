@@ -8,7 +8,7 @@ import { Comment } from 'src/app/models/Comment';
 })
 export class CommentListComponent implements OnInit {
 
-  @Input("comments") comments: Array<Comment>;
+  @Input("pComments") comments: Array<Comment>;
 
   constructor() { }
 

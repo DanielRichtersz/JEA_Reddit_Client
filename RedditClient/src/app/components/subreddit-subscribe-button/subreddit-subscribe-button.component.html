@@ -1,0 +1,4 @@
+<div class="subscribeButton">
+  <button *ngIf="!subscribed" (click)='subscribe()'>subscribe</button>
+  <button *ngIf="subscribed" (click)='subscribe()'>unsubscribe</button>
+</div>

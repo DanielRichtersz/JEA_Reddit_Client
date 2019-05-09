@@ -1,9 +1,10 @@
 <div #commentContainer>
-  <div #commentDetails>
-    Posted on: {{comment.dateCreated}} - Posted by: {{comment.owner.username}}
+  <div #commentDetails class="comment-details">
+    <i>Posted on: {{comment.dateCreated}} - Posted by: {{comment.owner.username}}</i>
   </div>
-  <div #commentContent>
+  <div #commentContent class="comment-content">
     {{comment.content}}
   </div>
   <app-create-comment-button *ngIf="comment" [postable]="comment"></app-create-comment-button>
+  <app-comment-list *ngIf="comments" [pComments]="comments"></app-comment-list>
 </div>

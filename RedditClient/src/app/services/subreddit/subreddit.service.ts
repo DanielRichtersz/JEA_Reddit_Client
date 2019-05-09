@@ -35,14 +35,16 @@ export class SubredditService {
     console.log("SubredditService.createSubreddit method called");
     const url = 'http://localhost:8080/api/subreddits';
     let body = new HttpParams();
-    body = body.set('name', subredditName);
-    body = body.set('description', subredditDescription);
-    body = body.set('username', username);
+    body = body
+      .set('name', subredditName)
+      .set('description', subredditDescription)
+      .set('username', username);
 
     return this.http.post<Subreddit>(url, body, httpOptions)
       .pipe(
         tap(),
-        catchError(this.errorHandler.handleError<Subreddit>('Creating subreddit')));
+        catchError(this.errorHandler.handleError<Subreddit>('Creating subreddit'))
+      );
   }
 
   public getSubreddit(subredditName: string): Observable<Subreddit> {
@@ -53,6 +55,33 @@ export class SubredditService {
       .pipe(
         tap(),
         catchError(this.errorHandler.handleError<Subreddit>('Retrieving subreddit'))
+      );
+  }
+
+  public subscribeToSubreddit(subredditName: string, username: string) {
+    console.log("SubredditService.subscribeToSubreddit method called");
+    const url = `http://localhost:8080/api/subreddits/${subredditName}/subscribe`;
+
+    let body = new HttpParams();
+    body = body.set('username', username);
+
+    return this.http.post<boolean>(url, body, httpOptions)
+      .pipe(
+        tap(),
+        catchError(this.errorHandler.handleError<boolean>('Subscribing to subreddit ' + subredditName)));
+  }
+
+  public getSubscribedToSubreddit(subredditName: string, username: string): Observable<boolean> {
+    console.log("SubredditService.getSubscribedToSubreddit method called");
+    const url = `http://localhost:8080/api/subreddits/${subredditName}/getsubscribed`;
+
+    let body = new HttpParams();
+    body = body.set('username', username);
+
+    return this.http.post<boolean>(url, body, httpOptions)
+      .pipe(
+        tap(),
+        catchError(this.errorHandler.handleError<boolean>('Retrieving subreddit'))
       );
   }
 
