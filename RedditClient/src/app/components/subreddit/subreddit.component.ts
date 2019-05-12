@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ResolveEnd } from '@angular/router';
 import { Post } from 'src/app/models/Post';
 import { SubredditService } from 'src/app/services/subreddit/subreddit.service';
 import { Subreddit } from 'src/app/models/Subreddit';
@@ -28,6 +28,7 @@ export class SubredditComponent implements OnInit {
     this.username = "username1";
     this.getSubreddit().then(() => {
       this.getSubredditTopPosts(0, 2);
+
     });
   }
 
@@ -53,19 +54,24 @@ export class SubredditComponent implements OnInit {
   }
 
   private getSubredditTopPosts(from: number, to: number) {
-    if (this.subreddit != null) {
-      this.subredditService.getSubredditTopPosts(from, to, this.subreddit.name).subscribe(fPosts => {
-        try {
-          this.errorMsg = "";
-          this.posts = fPosts;
-
-          console.log("Retrieved posts from " + from + " to " + to);
-          console.log(fPosts);
-        }
-        catch {
-          this.errorMsg = "Something went wrong while loading posts, please try again";
-        }
-      })
-    }
+    return new Promise((resolve, reject) => {
+      if (this.subreddit != null) {
+        this.subredditService.getSubredditTopPosts(from, to, this.subreddit.name).subscribe(fPosts => {
+          try {
+            this.errorMsg = "";
+            this.posts = fPosts;
+  
+            console.log("Retrieved posts from " + from + " to " + to);
+            console.log(fPosts);
+            resolve();
+          }
+          catch {
+            this.errorMsg = "Something went wrong while loading posts, please try again";
+            reject("Something went wrong while loading posts, please try again");
+          }
+        })
+      }
+    })
+    
   }
 }
