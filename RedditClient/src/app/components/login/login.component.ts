@@ -22,13 +22,12 @@ export class LoginComponent implements OnInit {
   }
 
   public login(username: string, password: string) {
-    console.log("Login method in component");
-    this.loginService.login(username, password).subscribe(getRedditor => {
+    console.log("LoginComponent.login method called");
+    this.loginService.login(username, password).subscribe(fRedditor => {
       try {
         this.errorMsg = "";
-        this.redditor = getRedditor;
+        this.redditor = fRedditor;
         console.log("Redditor: ", this.redditor);
-        this.saveLoggedInUser();
   
         this.navigateToUserTimeline();
       }
@@ -38,11 +37,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  saveLoggedInUser() {
-    
-  }
-
   private navigateToUserTimeline() {
+    console.log("LoginComponent.navigateToUserTimeline");
     if (this.redditor.username != null && this.redditor.username != "") {
       this.router.navigate(['/redditors/' + this.redditor.username + '/timeline']);
     }

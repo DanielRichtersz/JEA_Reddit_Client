@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
@@ -29,6 +29,8 @@ import { ClosableCreateCommentFormComponent } from './components/closable-create
 import { CommentListComponent } from './components/comment-list/comment-list.component';
 import { CommentDetailsComponent } from './components/comment-details/comment-details.component';
 import { SubredditSubscribeButtonComponent } from './components/subreddit-subscribe-button/subreddit-subscribe-button.component';
+import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { LoginService } from './services/login/login.service';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,8 @@ import { SubredditSubscribeButtonComponent } from './components/subreddit-subscr
     CreateCommentFormComponent,
   ],
   providers: [
-
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    LoginService
   ],
   bootstrap: [AppComponent]
 })
