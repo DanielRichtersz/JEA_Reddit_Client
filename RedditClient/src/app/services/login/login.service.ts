@@ -40,12 +40,16 @@ export class LoginService {
         catchError(this.errorHandler.handleError<Redditor>('Login')));
 
     observable.subscribe(fRedditor => {
-      if (fRedditor && fRedditor.token) {
+      if (fRedditor) {
         localStorage.setItem('currentUser', JSON.stringify(fRedditor));
         this.currentUserSubject.next(fRedditor);
       }
     });
 
     return observable;
+  }
+
+  public logout() {
+    localStorage.removeItem('currentUser');
   }
 }

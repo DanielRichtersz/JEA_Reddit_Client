@@ -3,6 +3,8 @@ import { ActivatedRoute, ResolveEnd } from '@angular/router';
 import { Post } from 'src/app/models/Post';
 import { SubredditService } from 'src/app/services/subreddit/subreddit.service';
 import { Subreddit } from 'src/app/models/Subreddit';
+import { SocketService } from 'src/app/services/socket/socket.service';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-subreddit',
@@ -19,16 +21,36 @@ export class SubredditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private subredditService: SubredditService) {
+    private subredditService: SubredditService,
+    private socketService: SocketService,
+    private loginService: LoginService) {
 
   }
 
   ngOnInit() {
     console.log("TODO: Username from auth");
-    this.username = "username1";
+    let redditor = this.loginService.currentUserValue;
+    if (redditor) {
+      this.username = redditor.username;
+    }
+    else {
+      this.loginService.logout();
+    }
+    
     this.getSubreddit().then(() => {
-      this.getSubredditTopPosts(0, 2);
+      this.getSubredditTopPosts(0, 2).then(() => {
+        this.socketService.open();
+        this.socketService.receive().subscribe((message) => {
+          console.log("Received message: " + JSON.parse(message.data));
 
+          let post: Post;
+          post = JSON.parse(message.data);
+          this.posts.unshift(post);
+        },
+        (message) => {
+          console.log("Error: ", message)
+        })
+      });
     });
   }
 
