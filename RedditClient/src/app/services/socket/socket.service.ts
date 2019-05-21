@@ -32,14 +32,34 @@ export class SocketService {
 
   }
 
+  public openTestSocket() {
+    console.log("Opening test socket");
+    this.socket = new $WebSocket('wss://localhost:8080/WebSocketServer/endpoint');
+    this.socket.onopen = function () {
+      console.log("SOCKET Connected");
+    }
+    this.socket.onmessage = function (event) {
+      var text = event.data;
+      console.log(text);
+    };
+  }
+
   public open() {
-    let currentUser = this.loginService.currentUserValue;  
+    console.log("Opening timeline socket");
+    let currentUser = this.loginService.currentUserValue;
 
     if (!currentUser) {
       this.router.navigate(['/login']);
     }
-    console.log("Username: " + currentUser.username);
-    this.socket = new $WebSocket("ws://127.0.0.1:8080/timeline/" + currentUser.username);
+    console.log("Socket.Service.Open() Username: " + currentUser.username);
+    this.socket = new $WebSocket('ws://localhost:8080/WebSocketServer/timeline/' + currentUser.username);
+    this.socket.onopen = function () {
+      console.log("SOCKET Connected");
+    }
+    this.socket.onmessage = function (event) {
+      var text = event.data;
+      console.log(text);
+    };
   }
 
   public receive() {
