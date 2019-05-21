@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Comment } from 'src/app/models/Comment';
 import { Post } from 'src/app/models/Post';
 import { Postable } from 'src/app/models/Postable';
+import { LoginService } from 'src/app/services/login/login.service';
+import { Redditor } from 'src/app/models/Redditor';
 
 @Component({
   selector: 'app-create-comment-form',
@@ -15,18 +17,20 @@ export class CreateCommentFormComponent implements OnInit {
 
   private errorMsg: string;
   private comment: Comment;
+  private redditor: Redditor;
+
   @Input('parentPostable') private reactionTo: Postable;
   //TODO: Username from socket
-  @Input('username') private username: string;
 
   constructor(
     private commentService: CommentService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) { }
 
   ngOnInit() {
-
+    this.redditor = this.loginService.currentUserValue;
   }
 
   private submit(commentContent: string) {
@@ -35,11 +39,11 @@ export class CreateCommentFormComponent implements OnInit {
     let postId = this.route.snapshot.paramMap.get('postId');
     let postTitle = this.route.snapshot.paramMap.get('postTitle');
 
-    if (!postId || !postTitle || !subredditName) {
+    if (!postId || !postTitle || !subredditName || !this.redditor.username) {
       this.errorMsg = 'Something went wrong while loading the page. Please refresh the page and try again';
     }
     
-    this.commentService.createComment(subredditName, "username1", commentContent, this.reactionTo.id.toString()).subscribe(fComment => {
+    this.commentService.createComment(subredditName, this.redditor.username, commentContent, this.reactionTo.id.toString()).subscribe(fComment => {
       try {
         this.errorMsg = '';
         console.log("Received response about created comment: ");

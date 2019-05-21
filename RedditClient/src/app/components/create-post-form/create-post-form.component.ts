@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post/post.service';
 import { Post } from 'src/app/models/Post';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Redditor } from 'src/app/models/Redditor';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-create-post-form',
@@ -12,20 +14,23 @@ export class CreatePostFormComponent implements OnInit {
 
   private errorMsg: string;
   private post: Post;
+  private redditor: Redditor;
 
   constructor(
     private postService: PostService, 
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private loginService: LoginService) { }
 
   ngOnInit() {
+    this.redditor = this.loginService.currentUserValue;
   }
 
   private submit(postTitle: string, postContent: string) {
     console.log("TODO: Get username from socket");
     let subredditName = this.route.snapshot.paramMap.get('subredditName');
 
-    this.postService.createPost(postTitle, postContent, subredditName, "username1").subscribe(fPost => {
+    this.postService.createPost(postTitle, postContent, subredditName, this.redditor.username).subscribe(fPost => {
       try {
         this.errorMsg = '';
         console.log("Received response about created post: ");
