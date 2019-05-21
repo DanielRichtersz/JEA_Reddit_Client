@@ -4,6 +4,7 @@ import { Redditor } from '../../models/Redditor';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { ErrorHandlingService } from '../errorhandler/error-handling.service';
+import { Router } from '@angular/router';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json;charset=UTF-8' })
@@ -21,7 +22,8 @@ export class LoginService {
   private baseUrl = 'api/';  // URL to web api
 
   constructor(private http: HttpClient,
-    private errorHandler: ErrorHandlingService) {
+    private errorHandler: ErrorHandlingService,
+    private router: Router) {
     this.currentUserSubject = new BehaviorSubject<Redditor>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -51,5 +53,6 @@ export class LoginService {
 
   public logout() {
     localStorage.removeItem('currentUser');
+    this.router.navigate(['/login']);
   }
 }

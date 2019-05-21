@@ -41,7 +41,7 @@ export class SubredditComponent implements OnInit {
       this.getSubredditTopPosts(0, 2).then(() => {
         this.socketService.open();
         this.socketService.receive().subscribe((message) => {
-          console.log("Received message: " + JSON.parse(message.data));
+          console.log("Received SOCKET message: " + JSON.parse(message.data));
 
           let post: Post;
           post = JSON.parse(message.data);
