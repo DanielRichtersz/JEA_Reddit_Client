@@ -5,6 +5,10 @@ import { SubredditService } from 'src/app/services/subreddit/subreddit.service';
 import { Subreddit } from 'src/app/models/Subreddit';
 import { SocketService } from 'src/app/services/socket/socket.service';
 import { LoginService } from 'src/app/services/login/login.service';
+import { SocketClientService } from 'src/app/services/socket/socket-client.service';
+import { PostService } from 'src/app/services/post/post.service';
+import { map, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs/internal/Subject';
 
 @Component({
   selector: 'app-subreddit',
@@ -19,10 +23,14 @@ export class SubredditComponent implements OnInit {
 
   private errorMsg: String;
 
+  private unsubscribeSubject: Subject<void> = new Subject<void>();
+
   constructor(
     private route: ActivatedRoute,
     private subredditService: SubredditService,
     private socketService: SocketService,
+    private socketClientService: SocketClientService,
+    private postService: PostService,
     private loginService: LoginService) {
 
   }
@@ -36,11 +44,21 @@ export class SubredditComponent implements OnInit {
     else {
       this.loginService.logout();
     }
-    
+
     this.getSubreddit().then(() => {
       this.getSubredditTopPosts(0, 2).then(() => {
-        this.socketService.openTestSocket();
-        //this.socketService.open();
+        //this.socketService.openTestSocket();
+        this.socketService.open();
+
+        //test socket
+        console.log("StompJS and SockJS: Attempt to open socket");
+        this.postService
+          .onPost()
+          .pipe(takeUntil(this.unsubscribeSubject))
+          .subscribe(post => {
+            this.posts.push(post);
+          });
+
         this.socketService.receive().subscribe((message) => {
           console.log("Received SOCKET message: " + JSON.parse(message.data));
 
@@ -48,9 +66,9 @@ export class SubredditComponent implements OnInit {
           post = JSON.parse(message.data);
           this.posts.unshift(post);
         },
-        (message) => {
-          console.log("Error: ", message)
-        })
+          (message) => {
+            console.log("Error: ", message)
+          })
       });
     });
   }
@@ -83,7 +101,7 @@ export class SubredditComponent implements OnInit {
           try {
             this.errorMsg = "";
             this.posts = fPosts;
-  
+
             console.log("Retrieved posts from " + from + " to " + to);
             console.log(fPosts);
             resolve();
@@ -95,6 +113,6 @@ export class SubredditComponent implements OnInit {
         })
       }
     })
-    
+
   }
 }

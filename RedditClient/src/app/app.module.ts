@@ -29,6 +29,7 @@ import { ClosableCreateCommentFormComponent } from './components/closable-create
 import { CommentListComponent } from './components/comment-list/comment-list.component';
 import { CommentDetailsComponent } from './components/comment-details/comment-details.component';
 import { SubredditSubscribeButtonComponent } from './components/subreddit-subscribe-button/subreddit-subscribe-button.component';
+import { CoreModule } from './services/socket/core.module';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { SubredditSubscribeButtonComponent } from './components/subreddit-subscr
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CoreModule
   ],
   entryComponents: [
     CreateCommentFormComponent,

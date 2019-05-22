@@ -42,6 +42,9 @@ export class CreatePostFormComponent implements OnInit {
         if (this.post != null) {
           console.log('This.post is not null, router is');
           console.log(this.router);
+          //Send for websockets
+          this.postService.save(this.post);
+
           this.router.navigate(['/subreddits', subredditName, 'posts', this.post.id, this.post.title]);
         }
         else {

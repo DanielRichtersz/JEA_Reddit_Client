@@ -34,7 +34,7 @@ export class SocketService {
 
   public openTestSocket() {
     console.log("Opening test socket");
-    this.socket = new $WebSocket('wss://localhost:8080/WebSocketServer/endpoint');
+    this.socket = new $WebSocket('ws://localhost:8080/WebSocketServer/endpoint');
     this.socket.onopen = function () {
       console.log("SOCKET Connected");
     }
